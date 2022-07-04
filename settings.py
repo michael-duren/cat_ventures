@@ -8,5 +8,11 @@ class Settings:
         self.screen_height = 800
         self.bg_color = (255, 204, 255)
 
+        # Meow settings
+        self.meow_speed = 1.0
+        self.meow_width = 3
+        self.meow_height = 15
+        self.meow_color = (0, 0, 0)
+
         # Cat settings
         self.cat_speed = 1.5
