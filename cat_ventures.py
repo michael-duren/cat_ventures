@@ -2,6 +2,8 @@ import sys
 
 from settings import Settings
 
+from cat import Cat
+
 import pygame
 
 class CatVentures:
@@ -12,8 +14,10 @@ class CatVentures:
         pygame.init()
         self.settings = Settings()
 
-        self.screen = pygame.display.set_mode(self.settings.screen_width, self.settings.screen_height)
+        self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption("Cat Ventures meow")
+
+        self.cat = Cat(self)
 
     def run_game(self):
         """Start with the main game loop"""
@@ -25,6 +29,7 @@ class CatVentures:
 
             # Redraw the screen during each pass through the loop.
             self.screen.fill(self.settings.bg_color)
+            self.cat.blitme()
 
             # Make the most recently drawn screen visible.
             pygame.display.flip()
