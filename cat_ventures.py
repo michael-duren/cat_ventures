@@ -3,6 +3,8 @@ import sys, pygame
 from settings import Settings
 
 from cat import Cat
+
+from meow import Meow
 class CatVentures:
     """Overall class to manage game assets and behavior."""
 
@@ -15,12 +17,14 @@ class CatVentures:
         pygame.display.set_caption("Cat Ventures meow")
 
         self.cat = Cat(self)
+        self.meows = pygame.sprite.Group()
 
     def run_game(self):
         """Start with the main game loop"""
         while True:
             self._check_events()
             self.cat.update()
+            self.meows.update()
             self._update_screen()
 
     def _check_events(self):
@@ -41,6 +45,8 @@ class CatVentures:
             self.cat.moving_left = True
         elif event.key == pygame.K_q:
             sys.exit()
+        elif event.key == pygame.K_SPACE:
+            self._fire_meow()
 
     def _check_keyup_events(self, event):
         """Respond to key releases"""
@@ -49,11 +55,18 @@ class CatVentures:
         elif event.key == pygame.K_LEFT:
             self.cat.moving_left = False
 
+    def _fire_meow(self):
+        """Create a new meow and add it to the meows group."""
+        new_meow = Meow(self)
+        self.meows.add(new_meow)
+
     def _update_screen(self):
         """Update images on the screen"""
         # Redraw the screen during each pass through the loop.
         self.screen.fill(self.settings.bg_color)
         self.cat.blitme()
+        for meow in self.meows.sprites():
+            meow.draw_meow()
 
         # Make the most recently drawn screen visible.
         pygame.display.flip()

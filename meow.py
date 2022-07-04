@@ -9,7 +9,7 @@ class Meow(Sprite):
         super().__init__()
         self.screen = cv_game.screen
         self.settings = cv_game.settings
-        self.color = self.settings.meow.color
+        self.color = self.settings.meow_color
 
         # Create a meow rect at (0,0) and then set correct position.
         self.rect = pygame.Rect(0,0, self.settings.meow_width,
