@@ -24,12 +24,8 @@ class CatVentures:
         while True:
             self._check_events()
             self.cat.update()
-            self.meows.update()
+            self._update_meows()
             self._update_screen()
-
-            for meow in self.meows.copy():
-                if meow.rect.bottom <= 0:
-                    self.meows.remove(meow)
 
     def _check_events(self):
         """Respond to keypresses and mouse events."""
@@ -64,6 +60,15 @@ class CatVentures:
         if len(self.meows) < self.settings.meows_allowed:
             new_meow = Meow(self)
             self.meows.add(new_meow)
+
+    def _update_meows(self):
+        """Update position of meows and get rid of old meows."""
+        # Update meow positions.
+        self.meows.update()
+
+        for meow in self.meows.copy():
+                if meow.rect.bottom <= 0:
+                    self.meows.remove(meow)
 
     def _update_screen(self):
         """Update images on the screen"""
