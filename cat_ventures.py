@@ -27,6 +27,10 @@ class CatVentures:
             self.meows.update()
             self._update_screen()
 
+            for meow in self.meows.copy():
+                if meow.rect.bottom <= 0:
+                    self.meows.remove(meow)
+
     def _check_events(self):
         """Respond to keypresses and mouse events."""
         for event in pygame.event.get():
@@ -57,8 +61,9 @@ class CatVentures:
 
     def _fire_meow(self):
         """Create a new meow and add it to the meows group."""
-        new_meow = Meow(self)
-        self.meows.add(new_meow)
+        if len(self.meows) < self.settings.meows_allowed:
+            new_meow = Meow(self)
+            self.meows.add(new_meow)
 
     def _update_screen(self):
         """Update images on the screen"""

@@ -13,6 +13,7 @@ class Settings:
         self.meow_width = 3
         self.meow_height = 15
         self.meow_color = (0, 0, 0)
+        self.meows_allowed = 3
 
         # Cat settings
         self.cat_speed = 1.5
